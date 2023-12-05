@@ -1,21 +1,10 @@
 import azure.functions as func
 from fastapi import FastAPI
+from controllers.todo_controller import todo_router
 
-fastapi_app = FastAPI()
+app = FastAPI()
 
-
-@fastapi_app.get("/sample")
-async def index():
-    return {
-        "info": "Try /hello/john for parameterized route.",
-    }
+app.include_router(todo_router, prefix="/todo", tags=["sample"])
 
 
-@fastapi_app.get("/hello/{name}")
-async def get_name(name: str):
-    return {
-        "name": name,
-    }
-
-
-app = func.AsgiFunctionApp(app=fastapi_app, http_auth_level=func.AuthLevel.ANONYMOUS)
+function_app = func.AsgiFunctionApp(app=app, http_auth_level=func.AuthLevel.ANONYMOUS)
