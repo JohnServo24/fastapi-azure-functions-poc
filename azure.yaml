@@ -5,6 +5,7 @@ metadata:
   template: fastapi-on-azure-functions@0.0.1-beta
 services:
   api:
-    project: .
+    project: ./src
     language: py
     host: function
+
